@@ -1,0 +1,146 @@
+#Hi the name's Thomas, and this is my polybar config.
+#You can find my  GitLab at https://gitlab.com/thomasc_ where I should have some interesting projects, and some dotfiles such as this.
+
+[vars]
+padding = 1
+
+[colors]
+    background = #1E1E2E	
+    foreground = #D9E0EE
+    foreground-alt = #988BA2	
+
+[bar/main]
+
+height = 38
+width = 1884
+offset-x = 18
+offset-y = 18
+padding = ${vars.padding}
+radius = 10
+
+
+modules-left = bspwm
+modules-center = title
+modules-right =  ethernet wifi battery time powermenu
+
+
+; font-0 = JetBrains Mono Nerd Font
+font-0 = JetBrainsMono Nerd Font:antialias=true:hinting=true:style=Medium:pixelsize=11;3.5
+font-1 = Material Icons:size=15:antialias=true:hinting:true;5
+
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+wm-restack=bspwm
+
+[bar/tray]
+inherit=bar/main
+
+offset-x= 1824
+width = 64
+
+tray-position = center
+
+[module/spa]
+type = custom/text
+content = " "
+
+; content-background = ${colors.red}
+content-padding = ${vars.padding}
+
+[module/bspwm]
+type = internal/bspwm
+label-focused = " "
+label-empty = " "
+label-urgent = " "
+label-occupied = " "
+
+pin-workspaces = true
+inline-mode = false
+enable-click = false
+enable-scroll = false
+reverse-scroll = false
+fuzzy-match = true
+
+format-padding = ${vars.padding}
+
+[module/title]
+type = internal/xwindow
+format = <label>
+label = %title%
+label-maxlen = 56
+
+[module/memory]
+type = internal/memory 
+label =  %gb_used% 
+;/%gb_total%
+
+[module/cpu]
+type = internal/cpu
+label =  %percentage%%
+
+[module/ethernet]
+type = internal/network
+interface = eth0
+
+format-connected =  <label-connected>
+label-connected = %downspeed%
+format-padding = ${vars.padding}
+; format-connected-background = ${colors.teal}
+
+[module/wifi]
+type = internal/network
+interface = wlp3s0
+
+format-connected = <label-connected>
+label-connected = 直 Up
+format-disconnected = <label-disconnected>
+label-disconnected = 睊 Down
+format-connected-padding = ${vars.padding}
+format-disconnected-padding = ${vars.padding}
+[module/time]
+type = internal/date
+; date = %Y-%m-%d%
+time = %I:%M
+label = %time%
+format =  <label>
+
+; format-background = ${colors.foreground-alt}
+format-padding = ${vars.padding}
+
+[module/battery]
+type = internal/battery
+
+battery = BAT1
+adapter = ACAD
+
+format-full = <ramp-capacity> <label-full>
+label-full = " %percentage%%"
+ramp-capacity-0 =  
+ramp-capacity-1 =   
+ramp-capacity-2 =   
+ramp-capacity-3 =  
+ramp-capacity-4 =   
+
+format-charging = <animation-charging> <label-charging>
+label-charging = " %percentage%%"
+animation-charging-0 =  
+animation-charging-1 =  
+animation-charging-2 =  
+animation-charging-3 =  
+animation-charging-4 =  
+
+format-discharging = <ramp-capacity> <label-discharging>
+label-discharging = " %percentage%%"
+
+format-charging-padding = ${vars.padding}
+; format-charging-background = ${colors.alt}
+format-discharging-padding = ${vars.padding}
+; format-discharging-background = ${colors.alt}
+format-full-padding = ${vars.padding}
+; format-full-background = ${colors.alt}
+
+[module/powermenu]
+type = custom/text
+content = " "
